@@ -4,7 +4,22 @@ import tkinter as tk
 import win32gui
 from PIL import ImageGrab, Image
 import numpy as np
-model = load_model('models/mnist_second_try.h5')
+import getpass
+import glob
+import os
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+models_path = os.path.join(BASE_DIR, 'models')
+
+def get_last_model():
+    usr_login = getpass.getuser()
+    list_of_files = glob.glob(os.path.join(BASE_DIR, models_path, '*.h5'))
+    latest_model = max(list_of_files, key=os.path.getmtime)
+
+    return latest_model
+
+model = load_model(get_last_model())
 
 
 def predict_digit(img):
