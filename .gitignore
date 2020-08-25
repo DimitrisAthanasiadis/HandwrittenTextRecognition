@@ -1,3 +1,4 @@
 /.vscode
 /models
 /venv
+__pycache__/gui.cpython-38.pyc
